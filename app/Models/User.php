@@ -15,8 +15,8 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * Class User
  * @package App\Models
  *
- * @property string first_name
  * @property string last_name
+ * @property string first_name
  * @property string email
  * @property string password
  * @property int role
@@ -39,7 +39,7 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $fillable = [
         'first_name',
-        'last_name',
+        'last_name_name',
         'email',
         'password',
     ];
