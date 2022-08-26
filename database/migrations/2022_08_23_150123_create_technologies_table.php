@@ -17,6 +17,9 @@ class CreateTechnologiesTable extends Migration
             $table->id();
             $table->string('name')->unique();
         });
+
+
+
     }
 
     /**
