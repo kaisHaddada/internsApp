@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Validation\Rule;
 use Validator;
 
 class AuthController extends Controller
@@ -44,6 +45,7 @@ class AuthController extends Controller
             'last_name' => 'required|string|between:2,100',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|confirmed|min:6',
+            'role'=>['required','integer',Rule::in([1,2])]
         ]);
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
@@ -82,6 +84,9 @@ class AuthController extends Controller
      */
     public function userProfile() {
         return response()->json(auth()->user());
+        //return response()->json([ 'valid' => auth()->check() ]);
+
+
     }
     /**
      * Get the token array structure.
@@ -94,7 +99,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
+            'expires_in' => auth('api')->factory()->getTTL() * 60,
             'user' => auth()->user()
         ]);
     }

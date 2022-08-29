@@ -13,7 +13,7 @@ class CreateProjectTechnologyTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_technology', function (Blueprint $table) {
+        Schema::create('pivot_table_project_technology', function (Blueprint $table) {
             $table->id();
             $table->integer('project_id');
             $table->integer('technology_id');
