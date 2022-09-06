@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\InternController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,16 @@ Route::group([
     Route::post('refresh', 'AuthController@refresh');
     Route::post('userProfile', 'AuthController@userProfile');
 
+});
+Route::prefix('admin')->group(function () {
+
+    Route::prefix('interns')->controller(InternController::class)->group(function () {
+        Route::get('/listing', 'listing');
+        Route::get('/getById', 'create');
+        Route::post('/store', 'store');
+        Route::put('/update/{intern_id}', 'update');
+        Route::delete('/destroy/{inter_id}', 'delete');
+    });
 });
 /*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
